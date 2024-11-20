@@ -1,16 +1,16 @@
 package models
 
 type Item struct {
-	ShortDescription string `json:"shortDescription"`
-	Price            string `json:"price"`
+	ShortDescription string `json:"shortDescription" validate:"required"`
+	Price            string `json:"price" validate:"required"`
 }
 
 type Receipt struct {
-	Retailer     string `json:"retailer"`
-	PurchaseDate string `json:"purchaseDate"`
-	PurchaseTime string `json:"purchaseTime"`
-	Total        string `json:"total"`
-	Items        []Item `json:"items"`
+	Retailer     string `json:"retailer" validate:"required"`
+	PurchaseDate string `json:"purchaseDate" validate:"required"`
+	PurchaseTime string `json:"purchaseTime" validate:"required"`
+	Total        string `json:"total" validate:"required"`
+	Items        []Item `json:"items" validate:"required,min=1"`
 }
 
 type ReceiptProcessResponse struct {
