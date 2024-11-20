@@ -1,13 +1,20 @@
 # receipt-processor
+ 
+## Go Version: 1.23.3
 
-# Dependencies 
-1. Go Version: 1.23.3
+# How to Run
+1. Clone the project ```git clone https://github.com/kwuzy/receipt-processor.git```
+2. Change directory ```cd receipt-processor```
+3. Install dependencies ```go install```
+4. Run server ```go run main.go```
+5. Hit the endpoints however you like (e.g. postman, cURL, etc.). Here are sample cURLs
 
-# Running
-1. Clone the project
-2. Install dependencies ```go mod init receipt-processor```
-3. Run server ```go run main.go```
-4. Hit the endpoints however you like (e.g. postman, cURL, etc.). Here are sample cURLs
+# Additional Notes
+1. Consider addition validating on POST `/process`. I chose not to do these because I decided this is just a system that stores and evaluates the points, we could have another system that actually checks validaty more thoroughly.
+    1. Check if total matches item total
+    2. Check if the exact same receipt's already been uploaded
+    3. Check if the date/time are valid
+2. Consider not erroring when determining points - if we want to give the user the benefit of the doubt. I decided to stop at errors right now because I figured this doesn't apply full validations but it does apply some.
 
 ## POST
 ### Process Receipt
