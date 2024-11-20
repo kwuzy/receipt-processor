@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"receipt-processor/routes"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	fmt.Println("hello")
+	router := gin.Default()
+
+	routes.RegisterReceiptRoutes(router)
+
+	router.Run("localhost:8080")
 }

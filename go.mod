@@ -1,4 +1,4 @@
-module github.com/kwuzy/receipt-processor.git
+module receipt-processor
 
 go 1.23.3
 
