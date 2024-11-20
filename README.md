@@ -7,7 +7,10 @@
 1. Clone the project
 2. Install dependencies ```go mod init receipt-processor```
 3. Run server ```go run main.go```
-4. Hit the endpoints however you like (e.g. postman, cURL, etc.). Here's a sample cURL
+4. Hit the endpoints however you like (e.g. postman, cURL, etc.). Here are sample cURLs
+
+## POST
+### Process Receipt
 ```
 curl -X POST http://localhost:8080/receipt -d '{
     "retailer": "Walgreens",
@@ -19,4 +22,9 @@ curl -X POST http://localhost:8080/receipt -d '{
         {"shortDescription": "Dasani", "price": "1.40"}
     ]
 }' -H "Content-Type: application/json"
+```
+## GET
+### Get Receipt by ID
+```
+curl http://localhost:8080/receipts/{id}
 ```

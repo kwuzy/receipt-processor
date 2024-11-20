@@ -3,10 +3,10 @@ package routes
 import (
 	"net/http"
 	"receipt-processor/models"
+	"receipt-processor/services"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/google/uuid"
 )
 
 func PostReceipt(c *gin.Context) {
@@ -27,7 +27,11 @@ func PostReceipt(c *gin.Context) {
 	// TODO: total price is equal to sum of item prices
 	// TODO: validate date and time
 
-	newID := uuid.New().String()
+	newID, err := services.ProcessReceipt(receipt)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to process receipt"})
+		return
+	}
 
 	response := models.ReceiptProcessResponse{
 		ID: newID,
@@ -36,9 +40,22 @@ func PostReceipt(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+func GetReceiptByID(c *gin.Context) {
+	id := c.Param("id")
+
+	receipt, exists := services.GetReceiptByID(id)
+	if !exists {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Receipt not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, receipt)
+}
+
 func RegisterReceiptRoutes(r *gin.Engine) {
 	receipts := r.Group("/receipts")
 	{
 		receipts.POST("/process", PostReceipt)
+		receipts.GET("/:id", GetReceiptByID)
 	}
 }
