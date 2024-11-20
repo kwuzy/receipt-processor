@@ -5,6 +5,7 @@ import (
 	"receipt-processor/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func PostReceipt(c *gin.Context) {
@@ -14,7 +15,13 @@ func PostReceipt(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"id": "hello from post"})
+	newID := uuid.New().String()
+
+	response := models.ReceiptProcessResponse{
+		ID: newID,
+	}
+
+	c.JSON(http.StatusOK, response)
 }
 
 func RegisterReceiptRoutes(r *gin.Engine) {
