@@ -55,13 +55,11 @@ func GetReceiptByID(c *gin.Context) {
 func GetReceiptPoints(c *gin.Context) {
 	id := c.Param("id")
 
-	_, exists := services.GetReceiptByID(id)
+	points, exists := services.GetReceiptPoints(id)
 	if !exists {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Receipt not found"})
 		return
 	}
-
-	points := 0
 
 	response := models.ReceiptPointsResponse{
 		Points: points,
