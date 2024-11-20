@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"fmt"
 	"receipt-processor/database"
 	"receipt-processor/models"
 )
@@ -31,9 +30,15 @@ func GetReceiptPoints(id string) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	fmt.Print(totalPrice)
+	if totalPrice == float32(int(totalPrice)) {
+		points += 50
+	}
 	// 25 points if the total is a multiple of 0.25.
+	if int(totalPrice*100)%25 == 0 {
+		points += 25
+	}
 	// 5 points for every two items on the receipt.
+	points += 5 * int(len(receipt.Items)/2)
 	// If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer. The result is the number of points earned.
 	// 6 points if the day in the purchase date is odd.
 	// 10 points if the time of purchase is after 2:00pm and before 4:00pm.

@@ -12,7 +12,7 @@
 ## POST
 ### Process Receipt
 ```
-curl -X POST http://localhost:8080/receipt -d '{
+curl -X POST http://localhost:8080/receipts/process -d '{
     "retailer": "Walgreens",
     "purchaseDate": "2022-01-02",
     "purchaseTime": "08:13",
@@ -27,4 +27,8 @@ curl -X POST http://localhost:8080/receipt -d '{
 ### Get Receipt by ID
 ```
 curl http://localhost:8080/receipts/{id}
+```
+### Get Receipt Points
+```
+curl http://localhost:8080/receipts/{id}/points
 ```
