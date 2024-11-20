@@ -23,7 +23,7 @@ func PostReceipt(c *gin.Context) {
 		return
 	}
 
-	// TODO: validate multiple uploads
+	// TODO: invalidate multiple uploads of the same receipt
 	// TODO: total price is equal to sum of item prices
 	// TODO: validate date and time
 
@@ -52,10 +52,29 @@ func GetReceiptByID(c *gin.Context) {
 	c.JSON(http.StatusOK, receipt)
 }
 
+func GetReceiptPoints(c *gin.Context) {
+	id := c.Param("id")
+
+	_, exists := services.GetReceiptByID(id)
+	if !exists {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Receipt not found"})
+		return
+	}
+
+	points := 0
+
+	response := models.ReceiptPointsResponse{
+		Points: points,
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
 func RegisterReceiptRoutes(r *gin.Engine) {
 	receipts := r.Group("/receipts")
 	{
 		receipts.POST("/process", PostReceipt)
 		receipts.GET("/:id", GetReceiptByID)
+		receipts.GET("/:id/points", GetReceiptPoints)
 	}
 }
