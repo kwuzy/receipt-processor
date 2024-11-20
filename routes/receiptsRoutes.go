@@ -55,9 +55,9 @@ func GetReceiptByID(c *gin.Context) {
 func GetReceiptPoints(c *gin.Context) {
 	id := c.Param("id")
 
-	points, exists := services.GetReceiptPoints(id)
-	if !exists {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Receipt not found"})
+	points, err := services.GetReceiptPoints(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
