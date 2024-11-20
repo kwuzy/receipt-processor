@@ -4,6 +4,7 @@ import (
 	"errors"
 	"math"
 	"strconv"
+	"strings"
 	"time"
 	"unicode"
 )
@@ -18,15 +19,19 @@ func countAlphanumeric(s string) int {
 	return count
 }
 
-func convertStringToPrice(s string) (float32, error) {
-	price, err := strconv.ParseFloat(s, 32)
+func convertStringToPrice(s string) (float64, error) {
+	price, err := strconv.ParseFloat(s, 64)
 	if err != nil {
 		return 0, errors.New("Price(s) are invalid")
 	}
 
 	price = math.Floor(price*100) / 100
 
-	return float32(price), nil
+	return price, nil
+}
+
+func isItemDescriptionMultipleOfThree(s string) bool {
+	return len(strings.TrimSpace(s))%3 == 0
 }
 
 func getDayFromDate(s string) (int, error) {
