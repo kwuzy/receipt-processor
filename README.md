@@ -5,7 +5,7 @@
 # How to Run
 1. Clone the project ```git clone https://github.com/kwuzy/receipt-processor.git```
 2. Change directory ```cd receipt-processor```
-3. Install dependencies ```go install```
+3. Install dependencies ```go mod tidy```
 4. Run server ```go run main.go```
 5. Hit the endpoints however you like (e.g. postman, cURL, etc.). Here are sample cURLs
 
