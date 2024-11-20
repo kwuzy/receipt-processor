@@ -24,7 +24,7 @@ func PostReceipt(c *gin.Context) {
 	}
 
 	// TODO: invalidate multiple uploads of the same receipt
-	// TODO: total price is equal to sum of item prices
+	// TODO: validate total price is equal to sum of item prices
 	// TODO: validate date and time
 
 	newID, err := services.ProcessReceipt(receipt)
