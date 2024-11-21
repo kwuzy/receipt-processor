@@ -18,5 +18,5 @@ type ReceiptProcessResponse struct {
 }
 
 type ReceiptPointsResponse struct {
-	Points int `json:"id"`
+	Points int `json:"points"`
 }
