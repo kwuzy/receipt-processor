@@ -7,7 +7,7 @@
 2. Change directory ```cd receipt-processor```
 3. Install dependencies ```go mod tidy```
 4. Run server ```go run main.go```
-5. Hit the endpoints however you like (e.g. postman, cURL, etc.). Here are sample cURLs
+5. Hit the endpoints however you like (e.g. postman, cURL, etc.). There are sample cURLs further below
 
 # Additional Notes
 1. Decided to include a regular GET because it just felt right - and helped me test. If we were to go into production we could just not expose this endpoint but I imagine other services could find it useful
