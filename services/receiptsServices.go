@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"fmt"
 	"math"
 	"receipt-processor/database"
 	"receipt-processor/models"
@@ -62,7 +61,6 @@ func GetReceiptPoints(id string) (int, error) {
 			points += int(math.Ceil(itemPrice * 0.2))
 		}
 	}
-	fmt.Println(points)
 	// 6 points if the day in the purchase date is odd.
 	if day%2 == 1 {
 		points += 6
